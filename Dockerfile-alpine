@@ -1,0 +1,16 @@
+FROM jenkins/jnlp-slave:3.27-1-alpine
+MAINTAINER Apirath Promyan <gamez.apirath.promyan@gmail.com>
+LABEL Description="This is an image, which provides the Jenkins agent executable with including docker, docker-compose, kubectl, Go, maven, node."
+
+# if we want to install via apk
+USER root
+
+# Update apk repositories
+RUN echo "http://dl-2.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+    && echo "http://dl-2.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && echo "http://dl-2.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk update
+
+# Install the latest Docker CE binaries
+RUN apk -U --no-cache --allow-untrusted add shadow docker docker-compose kubernetes maven go nodejs py-pip py-setuptools \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apk/* /usr/share/man /tmp/*
