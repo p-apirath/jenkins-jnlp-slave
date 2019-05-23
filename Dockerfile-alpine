@@ -12,5 +12,5 @@ RUN echo "http://dl-2.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
     && apk update
 
 # Install the latest Docker CE binaries
-RUN apk -U --no-cache --allow-untrusted add shadow docker docker-compose kubernetes maven go nodejs py-pip py-setuptools \
+RUN apk -U --no-cache --allow-untrusted add shadow docker docker-compose kubernetes go nodejs py-pip py-setuptools \
     && rm -rf /var/lib/apt/lists/* /var/cache/apk/* /usr/share/man /tmp/*
